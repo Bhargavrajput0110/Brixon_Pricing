@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brixon — Rate Card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=DM+Serif+Display&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F9F6F0;
+            --text-main: #2C2A28;
+            --text-muted: #767069;
+            --card-bg: #FFFFFF;
+            --accent: #E29988;
+            --accent-dark: #C97D6C;
+            --featured-bg: #2C362F;
+            --border-color: #EAE5DB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'DM Sans', sans-serif;
+            padding-bottom: 50px;
+        }
+
+        /* --- Print Optimization --- */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .bg-orb {
+                display: none;
+            }
+
+            .card {
+                break-inside: avoid;
+                border: 1px solid #eee;
+                box-shadow: none !important;
+            }
+
+            a[href]::after {
+                content: " (" attr(href) ")";
+                font-size: 8px;
+            }
+        }
+
+        .masthead {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 40px 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero {
+            padding: 60px 28px 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .pricing-grid {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 0 28px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card.featured {
+            background: var(--featured-bg);
+            color: #F9F6F0;
+        }
+
+        .tier-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .tier-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .card.featured .tier-desc {
+            color: rgba(249, 246, 240, 0.8);
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .features li {
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .cta {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            border: 1px solid var(--text-main);
+            border-radius: 99px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .card.featured .cta {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .footer {
+            max-width: 1240px;
+            margin: 40px auto 0;
+            padding: 40px 28px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-email {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-phone {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="masthead">
+        <img src="image_946b6a.png" alt="Brixon" style="height: 32px; width: auto;">
+        <div style="text-align: right; font-size: 12px; color: var(--text-muted);">Rate Card 2026</div>
+    </div>
+
+    <section class="hero">
+        <h1>Websites, 3D Experiences &<br>Software Development.</h1>
+    </section>
+
+    <div class="pricing-grid">
+        <!-- Core -->
+        <div class="card">
+            <div class="tier-name">Core</div>
+            <div class="price">₹30,000</div>
+            <p class="tier-desc">Focused site for modern brands.</p>
+            <ul class="features">
+                <li>✓ 5 Pages</li>
+                <li>✓ Mobile Responsive</li>
+                <li>✓ SEO Fundamentals</li>
+                <li>✓ 1 Month Support</li>
+            </ul>
+            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
+        </div>
+
+        <!-- Signature -->
+        <div class="card featured">
+            <div class="tier-name">Signature</div>
+            <div class="price">₹50,000</div>
+            <p class="tier-desc">For growing brands.</p>
+            <ul class="features">
+                <li>✓ 10 Pages</li>
+                <li>✓ CMS Setup</li>
+                <li>✓ Advanced SEO</li>
+                <li>✓ 3 Months Support</li>
+            </ul>
+            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="card">
+            <div class="tier-name">Premium</div>
+            <div class="price">₹70,000</div>
+            <p class="tier-desc">For scaling businesses.</p>
+            <ul class="features">
+                <li>✓ Full E-Commerce</li>
+                <li>✓ Payment Gateways</li>
+                <li>✓ User Dashboards</li>
+                <li>✓ 6 Months Support</li>
+            </ul>
+            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
+        </div>
+
+        <!-- Custom -->
+        <div class="card">
+            <div class="tier-name">Bespoke</div>
+            <div class="price" style="font-size: 24px;">Tailored</div>
+            <p class="tier-desc">Complex platforms & apps.</p>
+            <ul class="features">
+                <li>✓ Custom Software</li>
+                <li>✓ AI Integration</li>
+                <li>✓ 3D/WebGL Elements</li>
+                <li>✓ Unlimited Support</li>
+            </ul>
+            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <h2>Let's create something beautiful.</h2>
+        <a class="footer-email" href="mailto:rajputbhargav001@gmail.com">rajputbhargav001@gmail.com</a>
+        <div class="footer-phone">+91 7575849772</div>
+        <a href="https://www.instagram.com/brixon.in/" style="color: var(--text-muted);">@brixon.in</a>
+    </footer>
+
+</body>
+
+</html>
