@@ -1,252 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brixon — Rate Card</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=DM+Serif+Display&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #F9F6F0;
-            --text-main: #2C2A28;
-            --text-muted: #767069;
-            --card-bg: #FFFFFF;
-            --accent: #E29988;
-            --accent-dark: #C97D6C;
-            --featured-bg: #2C362F;
-            --border-color: #EAE5DB;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brixon — Rate Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-color: #F9F6F0; /* Soft warm cream */
+    --text-main: #2C2A28; /* Soft dark brown/charcoal */
+    --text-muted: #767069;
+    --card-bg: #FFFFFF;
+    --accent: #E29988; /* Soft peach/terracotta */
+    --accent-dark: #C97D6C;
+    --featured-bg: #2C362F; /* Deep sage/pine */
+    --border-color: #EAE5DB;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+  
+  /* Soft background gradient orb */
+  .bg-orb {
+    position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px; background: radial-gradient(circle, rgba(226,153,136,0.15) 0%, rgba(249,246,240,0) 70%);
+    z-index: 0; pointer-events: none;
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  /* ---------- masthead ---------- */
+  .masthead {
+    max-width: 1240px; margin: 0 auto; padding: 40px 32px 0;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    position: relative; z-index: 10;
+  }
+  .masthead-logo {
+    font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--text-main);
+    letter-spacing: -0.02em;
+  }
+  .masthead-label {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-muted); text-align: right;
+  }
 
-        body {
-            background: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'DM Sans', sans-serif;
-            padding-bottom: 50px;
-        }
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: 80px 28px 90px; text-align: center; }
+  .hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+  
+  .kicker {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent-dark); margin-bottom: 24px;
+    background: #F2EBE1; padding: 8px 16px; border-radius: 99px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif; font-weight: 400;
+    font-size: clamp(44px, 7vw, 72px); line-height: 1.05; letter-spacing: -0.01em;
+    color: var(--text-main); margin-bottom: 24px; max-width: 800px;
+  }
+  .hero h1 i { font-style: italic; color: var(--accent-dark); }
+  .hero p.sub {
+    font-size: 18px; line-height: 1.6; color: var(--text-muted);
+    max-width: 540px; margin: 0 auto;
+  }
 
-        /* --- Print Optimization --- */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
+  /* ---------- pricing ---------- */
+  .pricing { padding: 16px 28px 40px; position: relative; z-index: 2; }
+  .pricing-grid {
+    max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; align-items: stretch;
+  }
+  @media (max-width: 1150px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 760px; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 440px; gap: 28px; }
+  }
 
-            .bg-orb {
-                display: none;
-            }
+  @keyframes floatUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border-color);
+    border-radius: 32px; /* Soft rounded corners */
+    padding: 48px 32px 40px; display: flex; flex-direction: column;
+    opacity: 0; animation: floatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  }
+  .card:nth-child(1) { animation-delay: 0.1s; }
+  .card:nth-child(2) { animation-delay: 0.2s; }
+  .card:nth-child(3) { animation-delay: 0.3s; }
+  .card:nth-child(4) { animation-delay: 0.4s; }
+  .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
 
-            .card {
-                break-inside: avoid;
-                border: 1px solid #eee;
-                box-shadow: none !important;
-            }
+  .card.featured {
+    background: var(--featured-bg); border-color: var(--featured-bg); color: #F9F6F0;
+    transform: scale(1.03); box-shadow: 0 20px 50px rgba(44,54,47,0.15);
+  }
+  .card.featured:hover { transform: scale(1.03) translateY(-8px); box-shadow: 0 30px 60px rgba(44,54,47,0.2); }
+  @media (max-width: 1150px) {
+    .card.featured { transform: none; }
+    .card.featured:hover { transform: translateY(-8px); }
+  }
 
+  .card-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 32px; flex-wrap: wrap; }
+  .tier-tag {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent-dark); background: rgba(226,153,136,0.15);
+    padding: 6px 14px; border-radius: 99px;
+  }
+  .card.featured .tier-tag { background: rgba(249,246,240,0.15); color: #F9F6F0; }
+  .chosen-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; background: var(--accent); color: #fff; 
+    padding: 6px 14px; border-radius: 99px;
+  }
 
-        }
+  .tier-name {
+    font-family: 'DM Serif Display', serif; font-size: 32px; margin-bottom: 12px;
+  }
+  .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .price { font-size: 42px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+  .price-suffix {
+    font-size: 13px; color: var(--text-muted); font-weight: 500;
+  }
+  .card.featured .price-suffix { color: rgba(249,246,240,0.6); }
 
-        .masthead {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 40px 32px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  .tier-desc { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin-bottom: 32px; }
+  .card.featured .tier-desc { color: rgba(249,246,240,0.8); }
 
-        .hero {
-            padding: 60px 28px 60px;
-            text-align: center;
-        }
+  .divider { height: 1px; background: var(--border-color); margin-bottom: 32px; }
+  .card.featured .divider { background: rgba(249,246,240,0.15); }
 
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 56px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
+  .features { list-style: none; flex-grow: 1; margin-bottom: 40px; }
+  .features li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+  .features li svg { flex-shrink: 0; margin-top: 2px; color: var(--accent); }
+  .card.featured .features li svg { color: var(--accent); }
 
-        .pricing-grid {
-            max-width: 1240px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 0 28px;
-        }
+  .cta {
+    display: block; text-align: center; padding: 16px 20px;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.05em;
+    border-radius: 99px; border: 1px solid var(--text-main); color: var(--text-main);
+    transition: all 0.3s ease;
+  }
+  .cta:hover { background: var(--text-main); color: var(--card-bg); }
+  .card.featured .cta { border-color: #F9F6F0; color: #F9F6F0; }
+  .card.featured .cta:hover { background: #F9F6F0; color: var(--featured-bg); }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 32px;
-            display: flex;
-            flex-direction: column;
-        }
+  /* ---------- add-ons ---------- */
+  .addons { padding: 40px 28px 60px; max-width: 1240px; margin: 0 auto; }
+  .addons-header { text-align: center; margin-bottom: 40px; }
+  .addons-header h3 { font-family: 'DM Serif Display', serif; font-size: 36px; margin-bottom: 12px; }
+  .addons-header p { font-size: 16px; color: var(--text-muted); }
+  
+  .addon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 950px) {
+    .addon-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  }
+  
+  .addon-card {
+    background: #FFFFFF; border-radius: 24px;
+    padding: 36px; display: flex; flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .addon-card:hover { 
+    transform: translateY(-6px); box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+  }
+  
+  .addon-icon { margin-bottom: 20px; color: var(--accent); }
+  
+  .addon-title { 
+    font-size: 18px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; 
+  }
+  .addon-price { font-family: 'DM Serif Display', serif; font-size: 28px; margin-bottom: 16px; }
+  .addon-price span { 
+    font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text-muted); 
+    font-weight: 500; vertical-align: middle; margin-left: 6px;
+  }
+  .addon-desc { font-size: 14.5px; line-height: 1.6; color: var(--text-muted); }
 
-        .card.featured {
-            background: var(--featured-bg);
-            color: #F9F6F0;
-        }
+  /* ---------- included strip ---------- */
+  .included { max-width: 1240px; margin: 0 auto; padding: 20px 28px 80px; text-align: center; }
+  .included-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px;
+  }
+  .included-list {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 20px;
+    font-size: 15px; color: var(--text-main); font-weight: 500;
+  }
+  .included-list .dot { color: var(--accent-dark); opacity: 0.5; }
 
-        .tier-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .price {
-            font-size: 32px;
-            font-weight: 600;
-        }
-
-        .tier-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .card.featured .tier-desc {
-            color: rgba(249, 246, 240, 0.8);
-        }
-
-        .features {
-            list-style: none;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .features li {
-            font-size: 13px;
-            margin-bottom: 12px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .cta {
-            display: block;
-            text-align: center;
-            padding: 12px;
-            border: 1px solid var(--text-main);
-            border-radius: 99px;
-            font-weight: 600;
-            text-decoration: none;
-            color: var(--text-main);
-        }
-
-        .card.featured .cta {
-            border-color: #fff;
-            color: #fff;
-        }
-
-        .footer {
-            max-width: 1240px;
-            margin: 40px auto 0;
-            padding: 40px 28px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-email {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .footer-phone {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-    </style>
+  /* ---------- footer ---------- */
+  .footer { max-width: 1240px; margin: 0 auto; padding: 80px 28px 60px; text-align: center; }
+  .footer-label {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent-dark); margin-bottom: 16px;
+  }
+  .footer h2 {
+    font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5vw, 56px); 
+    margin-bottom: 24px;
+  }
+  .footer-email {
+    display: inline-block; font-size: 18px; font-weight: 500;
+    color: var(--text-main); text-decoration: none; border-bottom: 2px solid var(--accent);
+    padding-bottom: 4px; margin-bottom: 60px; transition: color 0.2s ease;
+  }
+  .footer-email:hover { color: var(--accent-dark); }
+  .footer-brand {
+    font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text-main); margin-bottom: 12px;
+  }
+  .copyright { font-size: 13px; color: var(--text-muted); }
+</style>
 </head>
-
 <body>
+  <div class="bg-orb"></div>
 
-    <div class="masthead">
-        <img src="image_946b6a.png" alt="Brixon" style="height: 32px; width: auto;">
-        <div style="text-align: right; font-size: 12px; color: var(--text-muted);">Rate Card 2026</div>
+  <div class="masthead">
+    <div class="masthead-logo">
+      <img src="image_946b6a.png" alt="Brixon" style="height: 32px; width: auto;">
     </div>
+    <div class="masthead-label">Rate Card<br>2026 Edition</div>
+  </div>
 
-    <section class="hero">
-        <h1>Websites, 3D Experiences &<br>Software Development.</h1>
-    </section>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="kicker">Digital Craftsmanship</div>
+      <h1>Websites, <i>3D Experiences</i>,<br>&amp; Software Development.</h1>
+      <p class="sub">Tailored packages designed for modern brands. Clear pricing, flawless aesthetics, delivered on schedule.</p>
+    </div>
+  </section>
 
+  <section class="pricing">
     <div class="pricing-grid">
-        <!-- Core -->
-        <div class="card">
-            <div class="tier-name">Core</div>
-            <div class="price">₹30,000</div>
-            <p class="tier-desc">Focused site for modern brands.</p>
-            <ul class="features">
-                <li>✓ 5 Pages</li>
-                <li>✓ Mobile Responsive</li>
-                <li>✓ SEO Fundamentals</li>
-                <li>✓ 1 Month Support</li>
-            </ul>
-            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
-        </div>
 
-        <!-- Signature -->
-        <div class="card featured">
-            <div class="tier-name">Signature</div>
-            <div class="price">₹50,000</div>
-            <p class="tier-desc">For growing brands.</p>
-            <ul class="features">
-                <li>✓ 10 Pages</li>
-                <li>✓ CMS Setup</li>
-                <li>✓ Advanced SEO</li>
-                <li>✓ 3 Months Support</li>
-            </ul>
-            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
+      <!-- Core Package -->
+      <div class="card">
+        <div class="card-top">
+          <span class="tier-tag">Core</span>
         </div>
+        <div class="tier-name">Core</div>
+        <div class="price-row">
+          <span class="price">₹30,000</span>
+          <span class="price-suffix">one-time</span>
+        </div>
+        <p class="tier-desc">A beautiful, focused site for modern brands ready to launch.</p>
+        <div class="divider"></div>
+        <ul class="features">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 5 custom-designed pages</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobile & Tablet Responsive</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contact forms & lead capture</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>On-page SEO fundamentals</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>2 rounds of design revisions</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>1 month of technical support</li>
+        </ul>
+        <a class="cta" href="mailto:rajputbhargav001@gmail.com?subject=Core%20Package%20Enquiry">Get Started</a>
+      </div>
 
-        <!-- Premium -->
-        <div class="card">
-            <div class="tier-name">Premium</div>
-            <div class="price">₹70,000</div>
-            <p class="tier-desc">For scaling businesses.</p>
-            <ul class="features">
-                <li>✓ Full E-Commerce</li>
-                <li>✓ Payment Gateways</li>
-                <li>✓ User Dashboards</li>
-                <li>✓ 6 Months Support</li>
-            </ul>
-            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
+      <!-- Signature Package -->
+      <div class="card featured">
+        <div class="card-top">
+          <span class="tier-tag">Signature</span>
+          <span class="chosen-tag">Most Chosen</span>
         </div>
+        <div class="tier-name">Signature</div>
+        <div class="price-row">
+          <span class="price">₹50,000</span>
+          <span class="price-suffix">one-time</span>
+        </div>
+        <p class="tier-desc">For growing brands ready to lead with a premium presence.</p>
+        <div class="divider"></div>
+        <ul class="features">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 10 custom-designed pages</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>CMS Setup (Edit content easily)</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom animations & interactions</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced SEO & Analytics</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>4 rounds of design revisions</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 months of technical support</li>
+        </ul>
+        <a class="cta" href="mailto:rajputbhargav001@gmail.com?subject=Signature%20Package%20Enquiry">Get Started</a>
+      </div>
 
-        <!-- Custom -->
-        <div class="card">
-            <div class="tier-name">Bespoke</div>
-            <div class="price" style="font-size: 24px;">Tailored</div>
-            <p class="tier-desc">Complex platforms & apps.</p>
-            <ul class="features">
-                <li>✓ Custom Software</li>
-                <li>✓ AI Integration</li>
-                <li>✓ 3D/WebGL Elements</li>
-                <li>✓ Unlimited Support</li>
-            </ul>
-            <a class="cta" href="mailto:rajputbhargav001@gmail.com">Contact Us</a>
+      <!-- Premium Package -->
+      <div class="card">
+        <div class="card-top">
+          <span class="tier-tag">Premium</span>
         </div>
+        <div class="tier-name">Premium</div>
+        <div class="price-row">
+          <span class="price">₹70,000</span>
+          <span class="price-suffix">starting at</span>
+        </div>
+        <p class="tier-desc">Built for scaling businesses, dynamic catalogs, and stores.</p>
+        <div class="divider"></div>
+        <ul class="features">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full E-Commerce / Catalog Setup</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Payment Gateway Integration</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>User Accounts & Dashboards</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inventory & Shipping Config</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority Build & Turnaround</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>6 months of premium support</li>
+        </ul>
+        <a class="cta" href="mailto:rajputbhargav001@gmail.com?subject=Premium%20Package%20Enquiry">Get Started</a>
+      </div>
+      
+      <!-- Bespoke Package -->
+      <div class="card">
+        <div class="card-top">
+          <span class="tier-tag">Custom</span>
+        </div>
+        <div class="tier-name">Bespoke</div>
+        <div class="price-row">
+          <span class="price">Tailored</span>
+          <span class="price-suffix">according to needs</span>
+        </div>
+        <p class="tier-desc">An open scope for complex platforms and unique apps.</p>
+        <div class="divider"></div>
+        <ul class="features">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom Software Development</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Web App Architecture (React/Node)</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom API & System Integrations</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated Engineering Team</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited Revisions &amp; QA</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ongoing Maintenance Retainer</li>
+        </ul>
+        <a class="cta" href="mailto:rajputbhargav001@gmail.com?subject=Bespoke%20Package%20Enquiry">Book a Call</a>
+      </div>
+
     </div>
+  </section>
 
-    <footer class="footer">
-        <h2>Let's create something beautiful.</h2>
-        <a class="footer-email" href="mailto:rajputbhargav001@gmail.com">rajputbhargav001@gmail.com</a>
-        <div class="footer-phone">+91 7575849772</div>
-        <a href="https://www.instagram.com/brixon.in/" style="color: var(--text-muted);">@brixon.in</a>
-    </footer>
+  <section class="addons">
+    <div class="addons-header">
+      <h3>Add-ons & Enhancements</h3>
+      <p>Powerful upgrades to elevate your digital presence and scale faster.</p>
+    </div>
+    <div class="addon-grid">
+      
+      <div class="addon-card">
+        <svg class="addon-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <div class="addon-title">Smart Workflows</div>
+        <div class="addon-price">+ ₹15,000 <span>flat fee</span></div>
+        <p class="addon-desc">Streamline your operations. We'll set up automated workflows connecting your website to your CRM, Slack, and email marketing tools so you never miss a lead.</p>
+      </div>
+
+      <div class="addon-card">
+        <svg class="addon-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+        <div class="addon-title">Custom AI Integration</div>
+        <div class="addon-price">+ ₹35,000 <span>starting at</span></div>
+        <p class="addon-desc">Deploy intelligent tools powered by OpenAI/Claude. Includes custom-trained customer service chatbots or automated content generation pipelines.</p>
+      </div>
+      
+      <div class="addon-card">
+        <svg class="addon-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/><polyline points="2 15.5 12 8.5 22 15.5"/><line x1="12" y1="2" x2="12" y2="8.5"/></svg>
+        <div class="addon-title">Immersive 3D & WebGL</div>
+        <div class="addon-price">+ ₹45,000 <span>starting at</span></div>
+        <p class="addon-desc">Stand out from the crowd. We build captivating custom 3D web elements, interactive WebGL canvases, and smooth Three.js animations tailored to your brand.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="included">
+    <div class="included-label">Included in every project</div>
+    <div class="included-list">
+      <span>Strategy Session</span><span class="dot">✦</span>
+      <span>Mobile-First Build</span><span class="dot">✦</span>
+      <span>SEO Fundamentals</span><span class="dot">✦</span>
+      <span>Direct Designer Access</span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-label">Have a project in mind?</div>
+    <h2>Let's create something beautiful.</h2>
+    <a class="footer-email" href="mailto:rajputbhargav001@gmail.com">rajputbhargav001@gmail.com</a>
+    <div style="margin-bottom: 24px;">
+      <a href="https://www.instagram.com/brixon.in/" target="_blank" style="color: var(--text-muted); font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--text-muted);">Follow on Instagram</a>
+    </div>
+    <div class="footer-brand" style="display: flex; justify-content: center;">
+      <img src="image_946b6a.png" alt="Brixon" style="height: 24px; width: auto;">
+    </div>
+    <div class="copyright">© 2026 Brixon. All rights reserved.</div>
+  </footer>
 
 </body>
-
 </html>
