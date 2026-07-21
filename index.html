@@ -224,16 +224,27 @@
   }
   .copyright { font-size: 13px; color: var(--text-muted); }
   @media print {
+    .bg-orb { display: none; }
+    .masthead { page-break-after: always; break-after: page; }
+    .hero { page-break-after: always; break-after: page; }
+    .pricing-grid { display: block !important; }
     .card {
+      page-break-after: always !important;
+      break-after: page !important;
+      page-break-inside: avoid !important;
       opacity: 1 !important;
       animation: none !important;
       transform: none !important;
       box-shadow: none !important;
+      margin-bottom: 2rem !important;
     }
     .card.featured {
       transform: none !important;
       box-shadow: none !important;
     }
+    .addons { page-break-before: always; break-before: page; }
+    .included { page-break-before: always; break-before: page; }
+    .footer { page-break-before: always; break-before: page; }
   }
 </style>
 </head>
@@ -242,7 +253,7 @@
 
   <div class="masthead">
     <div class="masthead-logo">
-      <img src="image_946b6a.png" alt="Brixon" style="height: 32px; width: auto;">
+      <img src="brixon-logo.png" alt="Brixon" style="height: 32px; width: auto;">
     </div>
     <div class="masthead-label">Rate Card<br>2026 Edition</div>
   </div>
@@ -403,7 +414,7 @@
       <a href="https://www.instagram.com/brixon.in/" target="_blank" style="color: var(--text-muted); font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--text-muted);">Follow on Instagram</a>
     </div>
     <div class="footer-brand" style="display: flex; justify-content: center;">
-      <img src="image_946b6a.png" alt="Brixon" style="height: 24px; width: auto;">
+      <img src="brixon-logo.png" alt="Brixon" style="height: 24px; width: auto;">
     </div>
     <div class="copyright">© 2026 Brixon. All rights reserved.</div>
   </footer>
