@@ -223,6 +223,18 @@
     font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text-main); margin-bottom: 12px;
   }
   .copyright { font-size: 13px; color: var(--text-muted); }
+  @media print {
+    .card {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .card.featured {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
 </style>
 </head>
 <body>
